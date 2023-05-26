@@ -45,10 +45,10 @@
       $guidsY = [$height / 3, $height / 2, $height * 2/3];
       
       for ($x = 0; $x < $width; $x += $scale) {
-        $rx = round($x);
+        $rx = floor($x);
         for ($y = 0; $y < $height; $y += $scale) {
           $pixelCount++;
-          $ry = round($y);
+          $ry = floor($y);
           
           $diffX = min(abs($guidsX[0] - $x), abs($guidsX[0] - $x), abs($guidsX[0]) - $x);
           $diffY = min(abs($guidsY[0] - $y), abs($guidsY[0] - $y), abs($guidsY[0]) - $y);
