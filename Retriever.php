@@ -10,9 +10,13 @@
   
     /**
      * @param string $imagePath
-     * @return array Returns [FOREGROUND => RGB, BACKGROUND => RGB, MEAN_LIGHTNESS => float<0; 1>]
+     * @return array | false Returns [FOREGROUND => RGB, BACKGROUND => RGB, MEAN_LIGHTNESS => float<0; 1>] and false on failure
      */
-    static function parse(string $imagePath): array {
+    static function parse(string $imagePath) {
+      if (!file_exists($imagePath)) {
+        return false;
+      }
+      
       ini_set("memory_limit","512M");
       
       $resource = self::imageResource($imagePath);
