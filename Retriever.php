@@ -2,7 +2,7 @@
 
   class Retriever {
     static int $totalTestedPixels = 100_000;
-    static int $colorChannelWidth = 16;
+    static int $colorChannelWidth = 4;
     
     const FOREGROUND = 0;
     const BACKGROUND = 1;
@@ -30,7 +30,7 @@
         $scale = sqrt($width * $height / self::$totalTestedPixels);
       }
   
-      $base = ceil(255 / self::$colorChannelWidth);
+      $base = ceil(256 / self::$colorChannelWidth);
       $pixels = new SplFixedArray($base ** 3);
       $mean = new SplFixedArray(101);
       
