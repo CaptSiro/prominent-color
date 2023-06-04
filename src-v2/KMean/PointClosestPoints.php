@@ -2,7 +2,7 @@
   
   namespace KMean;
   
-  trait PointClosest {
+  trait PointClosestPoints {
     function closest(array $points): int {
       $smallestDistance = PHP_INT_MAX;
       $pointIndex = -1;

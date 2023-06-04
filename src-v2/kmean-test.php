@@ -4,14 +4,14 @@
   
   use KMean\Centroid;
   use KMean\Point;
-  use KMean\PointClosest;
+  use KMean\PointClosestPoints;
   
   require_once __DIR__ . "/KMean/core.php";
   require_once __DIR__ . "/KMean/Centroid.php";
   require_once __DIR__ . "/KMean/Point.php";
-  require_once __DIR__ . "/KMean/PointClosest.php";
+  require_once __DIR__ . "/KMean/PointClosestPoints.php";
   
-  class P implements Centroid {
+  class P implements Point, Centroid {
     public int $x, $y;
     
     private array $centroidPoints;
@@ -29,7 +29,7 @@
       return sqrt(($point->x - $this->x) ** 2 + ($point->y - $this->y) ** 2);
     }
   
-    use PointClosest;
+    use PointClosestPoints;
   
     function connectedPoints(): array {
       return $this->centroidPoints;
@@ -53,6 +53,10 @@
       
       return $new;
     }
+  
+    function intoPoint(): Point {
+      return $this;
+    }
   }
   
   $points = json_decode(file_get_contents(__DIR__ . "/points.json"));
@@ -63,7 +67,7 @@
   $centroids = [new P(0, 0), new P(0, 0)];
   
   $groups = findGroups($points, $centroids, P::class);
-  usort($groups, function (P $a, P $b) {
+  usort($groups, function (P $a, P $b) { // ASC sort
     $countA = count($a->connectedPoints());
     $countB = count($b->connectedPoints());
     

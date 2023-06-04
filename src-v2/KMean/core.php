@@ -65,7 +65,7 @@
       $distance = 0;
       
       for ($i = 0; $i < $count; $i++) {
-        $distance += $new[$i]->distanceTo($centroids[$i]);
+        $distance += $new[$i]->distanceTo($centroids[$i]->intoPoint());
       }
       
       $centroids = $new;
