@@ -1,38 +1,50 @@
 <?php
   
+  namespace SortedQueue;
+  
+  use Iterator;
+
   require_once __DIR__ . "/SortedQueueNode.php";
   
   class SortedQueue implements Iterator {
     private ?SortedQueueNode $head = null;
-    public int $maxCapacity;
-    private int $capacity = 0;
-    private float $lowestPoints = 0;
   
+    /**
+     * @return SortedQueueNode|null
+     */
+    public function peak(): ?SortedQueueNode {
+      return $this->head;
+    }
+    
+    public int $maxCapacity;
+    private int $size = 0;
+    private float $lowestPoints = 0;
+    
     /**
      * @return int
      */
-    public function getCapacity(): int {
-      return $this->capacity;
+    public function getSize(): int {
+      return $this->size;
     }
     
     public function __construct(int $maxCapacity) {
       $this->maxCapacity = $maxCapacity;
     }
     
-    public function add(float $points, $value) {
-      if ($this->capacity === $this->maxCapacity && $this->lowestPoints > $points) {
+    public function insert(float $points, $value) {
+      if ($this->size === $this->maxCapacity && $this->lowestPoints > $points) {
         return;
       }
       
       if ($this->head === null) {
         $this->head = new SortedQueueNode($points, $value);
-        $this->capacity = 1;
+        $this->size = 1;
         $this->lowestPoints = $points;
         return;
       }
       
       $last = null;
-      $oldCap = $this->capacity;
+      $oldCap = $this->size;
       
       foreach ($this as $node) {
         if ($points < $node->points) {
@@ -40,7 +52,7 @@
           continue;
         }
         
-        $this->capacity++;
+        $this->size++;
         
         if ($last === null) {
           $this->head = new SortedQueueNode($points, $value);
@@ -54,31 +66,30 @@
         break;
       }
       
-      if ($oldCap === $this->capacity && $this->capacity + 1 !== $this->maxCapacity) {
+      if ($oldCap === $this->size && $this->size + 1 !== $this->maxCapacity) {
         $last->next = new SortedQueueNode($points, $value);
-        $this->capacity++;
+        $this->size++;
         $this->lowestPoints = $points;
       }
       
-      if ($this->maxCapacity < $this->capacity) {
+      if ($this->maxCapacity < $this->size) {
         foreach ($this as $index => $node) {
-          if ($index !== $this->capacity - 2) {
+          if ($index !== $this->size - 2) {
             continue;
           }
           
           $node->next = null;
           $this->lowestPoints = $node->points;
-          $this->capacity--;
+          $this->size--;
           break;
         }
       }
     }
     
-    
     public function debug(): string {
       $buffer = "";
       foreach ($this as $node) {
-        $buffer .= "[$node->points]:$node->value->";
+        $buffer .= "$node->points->";
       }
       
       return $buffer;
@@ -87,6 +98,7 @@
     
     private ?SortedQueueNode $current = null;
     private int $index = 0;
+    
     public function current() {
       return $this->current;
     }

@@ -1,5 +1,7 @@
 <?php
   
+  namespace SortedQueue;
+  
   class SortedQueueNode {
     public float $points;
     public $value;
