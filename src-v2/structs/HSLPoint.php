@@ -98,7 +98,7 @@
      * @return float
      */
     function distanceTo($point): float {
-      return sqrt(($point->h - $this->h) ** 2 + ($point->s - $this->s) ** 2 + ($point->l - $this->l) ** 2);
+      return abs($point->h - $this->h) + abs($point->s - $this->s) + abs($point->l - $this->l);
     }
   
     use PointClosestCentroids;

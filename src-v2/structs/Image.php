@@ -1,5 +1,8 @@
 <?php
   
+  require_once __DIR__ . "/HSLPoint.php";
+  require_once __DIR__ . "/PixelCount.php";
+  
   class Image {
     static function imageResource(string $path) {
       $type = mime_content_type($path);
@@ -16,10 +19,10 @@
   
     /**
      * @param string $path
-     * @param int $totalTestedPixels
+     * @param PixelCount $pixelCount
      * @return self | false
      */
-    static function createFrom(string $path, int $totalTestedPixels): self {
+    static function createFrom(string $path, PixelCount $pixelCount): self {
       if (!file_exists($path)) {
         return false;
       }
@@ -31,8 +34,10 @@
     
       $scale = 1;
     
-      if ($width * $height > $totalTestedPixels) {
-        $scale = sqrt($width * $height / $totalTestedPixels);
+      $totalPixelCount = $pixelCount->count($width, $height);
+      
+      if ($width * $height > $totalPixelCount) {
+        $scale = sqrt($width * $height / $totalPixelCount);
       }
     
       return new self($resource, $width, $height, $scale);

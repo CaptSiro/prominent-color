@@ -17,8 +17,8 @@
      * @param int $totalPixels
      * @return HSLCentroid[]
      */
-    static function groupImagePixels(string $path, int $groupsCount, int $totalPixels = 100_000): array {
-      $image = Image::createFrom($path, $totalPixels);
+    static function groupImagePixels(string $path, int $groupsCount, PixelCount $pixelCount): array {
+      $image = Image::createFrom($path, $pixelCount);
     
       /** @var HSLPoint[] $points */
       $points = iterator_to_array($image->pixels());

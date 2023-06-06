@@ -1,12 +1,15 @@
 <?php
   require_once __DIR__ . "/Grouper.php";
+  require_once __DIR__ . "/structs/WidthPixelCount.php";
+  require_once __DIR__ . "/structs/TotalPixelCount.php";
   
   $start = time();
   
-  $src = "../test-images/11.jpg";
-  $groups = Grouper::groupImagePixels($src, 5, 50_000);
+  $src = "../test-images/4.jpg";
+  $pixelCount = new WidthPixelCount(100);
+  $groups = Grouper::groupImagePixels($src, 5, $pixelCount);
   
-  $image = Image::createFrom($src, 50_000);
+  $image = Image::createFrom($src, $pixelCount);
   $canvas = imagecreatetruecolor(ceil($image->width / $image->scale), ceil($image->height / $image->scale));
   
   $end = time();
@@ -52,6 +55,7 @@
           width: 100vw;
           height: calc(100vh - 80px);
           object-fit: contain;
+          image-rendering: pixelated;
       }
 
       .row {
