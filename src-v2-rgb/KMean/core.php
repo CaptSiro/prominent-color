@@ -3,8 +3,8 @@
   use KMean\Point;
   use KMean\Centroid;
   
-  require_once __DIR__ . "/Point.php";
-  require_once __DIR__ . "/Centroid.php";
+  require_once __DIR__ . "/interfaces/Point.php";
+  require_once __DIR__ . "/interfaces/Centroid.php";
   
   /**
    * @param Centroid[] $centroids

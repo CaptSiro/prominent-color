@@ -3,14 +3,10 @@
   use KMean\Point;
   use KMean\PointClosestCentroids;
   
-  require_once __DIR__ . "/../KMean/Point.php";
-  require_once __DIR__ . "/../KMean/PointClosestCentroids.php";
+  require_once __DIR__ . "/../KMean/interfaces/Point.php";
+  require_once __DIR__ . "/../KMean/traits/PointClosestCentroids.php";
   
   class HSLPoint implements Point, JsonSerializable {
-    static function random(): self {
-      return new self(mt_rand() / mt_getrandmax() * 255, mt_rand() / mt_getrandmax() * 255, mt_rand() / mt_getrandmax() * 255, 0, 0);
-    }
-    
     static function fromInt(int $color, int $x, int $y): self {
       $red = (($color >> 16) & 0xFF);
       $green = (($color >> 8) & 0xFF);

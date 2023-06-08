@@ -5,8 +5,8 @@
   
   $start = time();
   
-  $src = "../test-images/4.jpg";
-  $pixelCount = new WidthPixelCount(100);
+  $src = "../test-images/1.jpg";
+  $pixelCount = new WidthPixelCount(64);
   $groups = Grouper::groupImagePixels($src, 5, $pixelCount);
   
   $image = Image::createFrom($src, $pixelCount);

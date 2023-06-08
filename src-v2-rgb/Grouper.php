@@ -1,7 +1,5 @@
 <?php
   
-  use KMean\Centroid;
-  
   require_once __DIR__ . "/structs/HSLPoint.php";
   require_once __DIR__ . "/structs/Image.php";
   require_once __DIR__ . "/structs/HSLCentroid.php";
@@ -29,6 +27,8 @@
       }
     
       $groups = findGroups($points, $centroids, HSLCentroid::class);
+      
+      $image->free();
     
       usort($groups, function (HSLCentroid $a, HSLCentroid $b) {
         if ($a->weight === $b->weight) {

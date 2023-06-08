@@ -3,7 +3,7 @@
   use KMean\Centroid;
   use KMean\Point;
   
-  require_once __DIR__ . "/../KMean/Centroid.php";
+  require_once __DIR__ . "/../KMean/interfaces/Centroid.php";
   require_once __DIR__ . "/HSLPoint.php";
   
   class HSLCentroid implements Centroid {
@@ -57,10 +57,6 @@
   
     function distanceTo($point): float {
       return $this->pixel->distanceTo($point);
-    }
-  
-    function closest(array $points): int {
-      return $this->pixel->closest($points);
     }
     
     function connectedPoints(): array {
