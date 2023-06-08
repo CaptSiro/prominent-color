@@ -1,9 +1,11 @@
 <?php
   
   use KMean\Centroid;
+  use KMean\CentroidFactory;
   use KMean\Point;
   
   require_once __DIR__ . "/../KMean/interfaces/Centroid.php";
+  require_once __DIR__ . "/../KMean/interfaces/CentroidFactory.php";
   require_once __DIR__ . "/HSLPoint.php";
   
   class HSLCentroid implements Centroid {
@@ -65,5 +67,11 @@
   
     function intoPoint(): Point {
       return $this->getPixel();
+    }
+  }
+  
+  class HSLCentroidFactory implements CentroidFactory {
+    function create(array $points): Centroid {
+      return HSLCentroid::new($points);
     }
   }

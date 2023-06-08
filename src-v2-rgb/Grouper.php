@@ -26,7 +26,7 @@
         $centroids[] = HSLCentroid::default($pixel);
       }
     
-      $groups = findGroups($points, $centroids, HSLCentroid::class);
+      $groups = findGroups($points, $centroids, new HSLCentroidFactory());
       
       $image->free();
     

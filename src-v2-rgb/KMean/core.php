@@ -1,5 +1,6 @@
 <?php
   
+  use KMean\CentroidFactory;
   use KMean\Point;
   use KMean\Centroid;
   
@@ -9,10 +10,10 @@
   /**
    * @param Centroid[] $centroids
    * @param Point[] $points
-   * @param string $centroidClass
+   * @param CentroidFactory $factory
    * @return Centroid[]
    */
-  function moveCentroids(array $centroids, array $points, string $centroidClass): array {
+  function moveCentroids(array $centroids, array $points, CentroidFactory $factory): array {
     $centroidsMap = [];
     
     $count = count($points);
@@ -28,13 +29,6 @@
     }
     
     $new = [];
-    try {
-      $r = new ReflectionClass($centroidClass);
-      $instance = $r->newInstanceWithoutConstructor();
-    } catch (ReflectionException $e) {
-      var_dump($e);
-      return [];
-    }
     
     $count = count($centroids);
     for ($i = 0; $i < $count; $i++) {
@@ -43,7 +37,7 @@
         continue;
       }
       
-      $new[$i] = $instance::new($centroidsMap[$i]);
+      $new[$i] = $factory->create($centroidsMap[$i]);
     }
     
     return $new;
@@ -54,14 +48,14 @@
   /**
    * @param array $points
    * @param Centroid[] $centroids
-   * @param string $centroidClass
+   * @param CentroidFactory $factory
    * @return array
    */
-  function findGroups(array $points, array $centroids, string $centroidClass): array {
+  function findGroups(array $points, array $centroids, CentroidFactory $factory): array {
     $count = count($centroids);
     
     do {
-      $new = moveCentroids($centroids, $points, $centroidClass);
+      $new = moveCentroids($centroids, $points, $factory);
       $distance = 0;
       
       for ($i = 0; $i < $count; $i++) {
