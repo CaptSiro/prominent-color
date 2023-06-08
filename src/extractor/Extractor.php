@@ -12,7 +12,7 @@
   require_once __DIR__ . "/../k-means/interfaces/Centroid.php";
 
   class Extractor {
-    function parseImage(Image $image, int $groupsCount, PixelCount $pixelCount, CentroidFactory $factory): Stats {
+    function parseImage(Image $image, int $groupsCount, CentroidFactory $factory): Stats {
       /** @var Pixel[] $points */
       $points = iterator_to_array($image->pixels());
       $centroids = $image->evenDistribution($groupsCount);
