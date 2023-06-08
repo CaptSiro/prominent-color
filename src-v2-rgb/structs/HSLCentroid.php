@@ -69,9 +69,3 @@
       return $this->getPixel();
     }
   }
-  
-  class HSLCentroidFactory implements CentroidFactory {
-    function create(array $points): Centroid {
-      return HSLCentroid::new($points);
-    }
-  }

@@ -3,6 +3,7 @@
   require_once __DIR__ . "/structs/HSLPoint.php";
   require_once __DIR__ . "/structs/Image.php";
   require_once __DIR__ . "/structs/HSLCentroid.php";
+  require_once __DIR__ . "/structs/HSLCentroidFactory.php";
   
   require_once __DIR__ . "/KMean/core.php";
   

@@ -6,6 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/src-v3" />
       <excludeFolder url="file://$MODULE_DIR$/src-v4" />
       <excludeFolder url="file://$MODULE_DIR$/src-v2" />
+      <excludeFolder url="file://$MODULE_DIR$/src-ts" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
