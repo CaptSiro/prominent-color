@@ -1,0 +1,7 @@
+{
+    "name": "prominent-color",
+    "version": "1.0.0",
+    "dependencies": [
+        "https:\/\/github.com\/CaptSiro\/k-means.git"
+    ]
+}
