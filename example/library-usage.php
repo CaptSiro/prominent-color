@@ -16,14 +16,14 @@ require_once __DIR__ . "/../absol_modules/index.php";
 
 $image_source = "../test-images/7.jpg";
 
-// scale any image to use maximum of 64 pixels for width
+// scale any image to 64 pixels in width
 $pixel_count = new WidthPixelCount(64);
 
 try {
     $image = Image::create($image_source, $pixel_count);
 
     /** @var Centroid[] $groups */
-    $groups = ProminentColor::generate($image, 9);
+    $groups = ProminentColor::extract($image, 9);
 } catch (Exception $e) {
     echo $e->getMessage();
     exit;

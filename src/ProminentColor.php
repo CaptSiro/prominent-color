@@ -28,7 +28,7 @@ class ProminentColor {
      * @return array
      * @throws Exception
      */
-    static function generate(Image $image, int $colors, string $color_space = "rgb"): array {
+    static function extract(Image $image, int $colors, string $color_space = "rgb"): array {
         $color_plugin = Plugins::color_plugin($color_space);
 
         $points = $image->pixels($color_plugin);

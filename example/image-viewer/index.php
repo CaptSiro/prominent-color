@@ -17,7 +17,7 @@ try {
     $image = Image::create($src, $pixel_count);
 
     /** @var Centroid[] $groups */
-    $groups = ProminentColor::generate($image, 9);
+    $groups = ProminentColor::extract($image, 9);
 } catch (Exception $e) {
     echo $e->getMessage();
     exit;
