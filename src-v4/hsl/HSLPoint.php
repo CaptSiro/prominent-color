@@ -1,16 +1,17 @@
 <?php
   
+  use Extractor\Pixel;
+  use Extractor\RGB;
+  use KMean\Centroid;
   use KMean\Point;
-  use KMean\PointClosestCentroids;
+  use KMean\PointClosestPoints;
   
-  require_once __DIR__ . "/../KMean/Point.php";
-  require_once __DIR__ . "/../KMean/PointClosestCentroids.php";
+  require_once __DIR__ . "/../k-means/interfaces/Point.php";
+  require_once __DIR__ . "/../k-means/traits/PointClosestPoints.php";
+  require_once __DIR__ . "/../extractor/RGB.php";
+  require_once __DIR__ . "/../extractor/interfaces/Pixel.php";
   
-  class HSLPoint implements Point {
-    static function random(): self {
-      return new self(mt_rand() / mt_getrandmax() * 360, mt_rand() / mt_getrandmax(), mt_rand() / mt_getrandmax(), 0, 0);
-    }
-    
+  class HSLPoint implements Point, Pixel, JsonSerializable {
     static function fromInt(int $color, int $x, int $y): self {
       $red = (($color >> 16) & 0xFF) / 255.0;
       $green = (($color >> 8) & 0xFF) / 255.0;
@@ -43,16 +44,16 @@
       };
     
       return new self(
-        360 * (($hue ?? 0) / 6),
+        ($hue ?? 0) / 6,
         $saturation,
         $lightness,
         $x,
         $y
       );
     }
-
-    
-    
+  
+  
+  
     public float $h, $s, $l;
     public int $x, $y;
     
@@ -65,24 +66,23 @@
     }
     
     public function __toString(): string {
-      $h = round($this->h * 100) / 100;
+      $h = round($this->h * 360);
       $s = round($this->s * 100);
       $l = round($this->l * 100);
-      
+  
       return "hsl($h, $s%, $l%)";
     }
   
     /**
      * https://www.30secondsofcode.org/js/s/hsl-to-rgb/
-     * @return float[]
      */
-    function toRGB(): array {
+    function toRGB(): RGB {
       $a = $this->s * min($this->l, 1 - $this->l);
-      return [$this->f($a, 0), $this->f($a, 8), $this->f($a, 4)];
+      return new RGB($this->f($a, 0), $this->f($a, 8), $this->f($a, 4));
     }
     
     private function k($n): float {
-      return ($n + $this->h / 30) % 12;
+      return ($n + $this->h * 12) % 12;
     }
     
     private function f($a, $n): float {
@@ -93,6 +93,8 @@
       )));
     }
   
+    
+    
     /**
      * @param HSLPoint $point
      * @return float
@@ -101,5 +103,20 @@
       return abs($point->h - $this->h) + abs($point->s - $this->s) + abs($point->l - $this->l);
     }
   
-    use PointClosestCentroids;
+    use PointClosestPoints;
+  
+    
+    
+    public function jsonSerialize(): stdClass {
+      $obj = new stdClass();
+      $obj->h = $this->h;
+      $obj->s = $this->s;
+      $obj->l = $this->l;
+      
+      return $obj;
+    }
+  
+    function toCentroid(): Centroid {
+      // TODO: Implement toCentroid() method.
+    }
   }

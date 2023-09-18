@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>KMean</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 1fr 80px;
+      background-color: black;
+    }
+    
+    img {
+      width: 100vw;
+      height: calc(100vh - 80px);
+      object-fit: contain;
+    }
+    
+    .row {
+      width: 100vw;
+      height: 80px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+    }
+  </style>
+  
+  <script src="script.ts" type="module" defer></script>
+</head>
+<body>
+  <canvas id="screen"></canvas>
+  <div class="row"></div>
+  
+  <div style="display: none">
+    <canvas id="image"></canvas>
+  </div>
+</body>
+</html>

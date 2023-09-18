@@ -65,7 +65,7 @@
       return $this->pixels;
     }
   
-    function intoPoint(): Point {
+    function toPoint(): Point {
       return $this->getPixel();
     }
   }

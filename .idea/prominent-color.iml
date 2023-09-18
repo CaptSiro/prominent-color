@@ -2,18 +2,21 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/extractor/interfaces" isTestSource="false" packagePrefix="Extractor" />
-      <sourceFolder url="file://$MODULE_DIR$/src/k-means/interfaces" isTestSource="false" packagePrefix="KMean" />
-      <sourceFolder url="file://$MODULE_DIR$/src/k-means/traits" isTestSource="false" packagePrefix="KMean" />
+      <sourceFolder url="file://$MODULE_DIR$/src-v4" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src-v4/extractor/interfaces" isTestSource="false" packagePrefix="Extractor" />
       <excludeFolder url="file://$MODULE_DIR$/src-v3" />
       <excludeFolder url="file://$MODULE_DIR$/src-v4" />
       <excludeFolder url="file://$MODULE_DIR$/src-v2" />
       <excludeFolder url="file://$MODULE_DIR$/src-ts" />
-      <excludeFolder url="file://$MODULE_DIR$/src/_depricated-nocoma-style-implementation" />
       <excludeFolder url="file://$MODULE_DIR$/src-v2-rgb/structs" />
       <excludeFolder url="file://$MODULE_DIR$/absol" />
+      <excludeFolder url="file://$MODULE_DIR$/src-v4/_depricated-nocoma-style-implementation" />
+      <excludeFolder url="file://$MODULE_DIR$/src-v4/k-means" />
+      <excludeFolder url="file://$MODULE_DIR$/src-v4/k-means/interfaces" />
+      <excludeFolder url="file://$MODULE_DIR$/src-v4/k-means/traits" />
+      <excludeFolder url="file://$MODULE_DIR$/src-v2-rgb" />
     </content>
+    <content url="file://$MODULE_DIR$/src-v4/k-means" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

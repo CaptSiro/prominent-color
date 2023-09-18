@@ -12,7 +12,7 @@
       $pointIndex = -1;
     
       for ($i = 0; $i < count($points); $i++) {
-        $distance = $this->distanceTo($points[$i]->intoPoint());
+        $distance = $this->distanceTo($points[$i]->toPoint());
       
         if ($distance < $smallestDistance) {
           $smallestDistance = $distance;

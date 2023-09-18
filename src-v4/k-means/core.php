@@ -15,10 +15,11 @@
    */
   function moveCentroids(array $centroids, array $points, CentroidFactory $factory): array {
     $centroidsMap = [];
+    $centroidPoints = array_map(fn(Centroid $c) => $c->toPoint(), $points);
     
     $count = count($points);
     for ($i = 0; $i < $count; $i++) {
-      $centroidIndex = $points[$i]->closest($centroids);
+      $centroidIndex = $points[$i]->closest($centroidPoints);
       
       if (!isset($centroidsMap[$centroidIndex])) {
         $centroidsMap[$centroidIndex] = [$points[$i]];
@@ -59,7 +60,7 @@
       $distance = 0;
       
       for ($i = 0; $i < $count; $i++) {
-        $distance += $new[$i]->distanceTo($centroids[$i]->intoPoint());
+        $distance += $new[$i]->toPoint()->distanceTo($centroids[$i]->toPoint());
       }
       
       $centroids = $new;

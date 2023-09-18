@@ -7,5 +7,5 @@
   interface Centroid {
     function connectedPoints(): array;
     
-    function intoPoint(): Point;
+    function toPoint(): Point;
   }
